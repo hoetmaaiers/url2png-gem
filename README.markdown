@@ -13,11 +13,27 @@ Any Ruby on Rails developer who wants/needs to generate screenshots from sites u
     gem install url2png
 
 
-### Initialization
+### Configuration
 
-Initialize the connection:
+In 
 
-    @up = Url2png.new('PUBLIC_KEY', 'SHARED_SECRET')
+### Helpers
+
+Generate an image tag:
+
+    site_image_tag url, [options]
+
+Options are the same as the image_tag in Rails.
+
+By default the size is set to 400 x 400 px.
+To generate an image with a specific site:
+
+    site_image_tag url, :size => '300x200'
+
+To only get the image url:
+
+    site_image_url url, :size => '300x200'
+
 
 ## Important
 
