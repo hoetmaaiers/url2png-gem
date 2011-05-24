@@ -15,8 +15,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "url2png"
   gem.homepage = "http://github.com/wout/url2png"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{TODO: A ruby gem for the url2png screenshot service API}
+  gem.description = %Q{TODO: A ruby gem wrapping the url2png screenshot service API}
   gem.email = "wout@boysabroad.com"
   gem.authors = ["wout fierens"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
