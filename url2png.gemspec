@@ -28,8 +28,10 @@ Gem::Specification.new do |s|
     "lib/url2png/config.rb",
     "lib/url2png/dimensions.rb",
     "lib/url2png/helpers/common.rb",
+    "lib/url2png/rails.rb",
     "test/helper.rb",
-    "test/test_url2png.rb"
+    "test/test_url2png.rb",
+    "url2png.gemspec"
   ]
   s.homepage = %q{http://github.com/wout/url2png}
   s.licenses = ["MIT"]
