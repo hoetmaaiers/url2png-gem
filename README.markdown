@@ -17,7 +17,7 @@ Any Ruby on Rails developer who wants/needs to load screenshots from sites using
 
 Initialize the connection:
 
-    @up = Url2png.new('Your API Key', 'GSN-123456-A')
+    @up = Url2png.new('PUBLIC_KEY', 'SHARED_SECRET')
 
 ## Important
 
