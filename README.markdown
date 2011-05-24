@@ -1,10 +1,10 @@
-# go_squared gem
+# url2png gem
 
 ## What is it?
 A Ruby gem wrapping the url2png.com API.
 
 ## Who should use it?
-Any Ruby on Rails developer who wants/needs to load screenshots from sites using url2png.com.
+Any Ruby on Rails developer who wants/needs to generate screenshots from sites using url2png.com.
 
 ## Usage
 
