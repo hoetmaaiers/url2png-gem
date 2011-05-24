@@ -20,7 +20,7 @@ First define your public key and shared secret:
     Url2png::Config.public_key = 'PXXXXXXXXXXXXX'
     Url2png::Config.shared_secret = 'SXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
-In Rails you probably want to do that in your application file.
+In Rails you probably want to do that in your application.rb file.
 
 
 ### Helpers
@@ -32,7 +32,7 @@ Generate an image tag:
 Options are the same as the image_tag in Rails.
 
 By default the size is set to 400 x 400 px.
-To generate an image with a specific site:
+To generate an image with a specific size:
 
     site_image_tag url, :size => '300x200'
 
