@@ -15,7 +15,13 @@ Any Ruby on Rails developer who wants/needs to generate screenshots from sites u
 
 ### Configuration
 
-In 
+First define your public key and shared secret:
+
+    Url2png::Config.public_key = 'PXXXXXXXXXXXXX'
+    Url2png::Config.shared_secret = 'SXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+
+In Rails you probably want to do that in your application file.
+
 
 ### Helpers
 
