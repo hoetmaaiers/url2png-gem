@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{url2png}
-  s.version = "0.0.3"
+  s.version = "0.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["wout fierens"]
-  s.date = %q{2011-05-24}
-  s.description = %q{A ruby gem wrapping the url2png screenshot service API}
+  s.date = %q{2011-05-25}
+  s.description = %q{Generate screenshots from websites almost instantly at any preferred size using ruby and the url2png.com API}
   s.email = %q{wout@boysabroad.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -33,11 +33,11 @@ Gem::Specification.new do |s|
     "test/test_url2png.rb",
     "url2png.gemspec"
   ]
-  s.homepage = %q{http://github.com/wout/url2png}
+  s.homepage = %q{http://github.com/wout/url2png-gem}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{A ruby gem for the url2png screenshot service API}
+  s.summary = %q{A ruby gem wrapping the url2png.com screenshot service API}
   s.test_files = [
     "test/helper.rb",
     "test/test_url2png.rb"
