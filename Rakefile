@@ -13,10 +13,10 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "url2png"
-  gem.homepage = "http://github.com/wout/url2png"
+  gem.homepage = "http://github.com/wout/url2png-gem"
   gem.license = "MIT"
-  gem.summary = %Q{A ruby gem for the url2png screenshot service API}
-  gem.description = %Q{A ruby gem wrapping the url2png screenshot service API}
+  gem.summary = %Q{A ruby gem wrapping the url2png.com screenshot service API}
+  gem.description = %Q{Generate screenshots from websites almost instantly at any preferred size using ruby and the url2png.com API}
   gem.email = "wout@boysabroad.com"
   gem.authors = ["wout fierens"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
