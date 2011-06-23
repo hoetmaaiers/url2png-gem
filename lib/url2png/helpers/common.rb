@@ -18,6 +18,8 @@ module Url2png
       end
 
       def site_image_url url, options = {}
+        options[:protocol] ||= 'http://'
+        
         dim = Url2png::Dimensions.parse(options)
 
         # escape the url
@@ -27,7 +29,7 @@ module Url2png
         token = Digest::MD5.hexdigest("#{ Url2png::Config.shared_secret }+#{ safe_url }")
 
         # build image url
-        File.join(Url2png::Config.api_url(request.protocol), Url2png::Config.api_version, Url2png::Config.public_key, token, dim[:size], safe_url)
+        File.join(Url2png::Config.api_url(options[:protocol]), Url2png::Config.api_version, Url2png::Config.public_key, token, dim[:size], safe_url)
       end
       
     end
