@@ -1,8 +1,8 @@
 module Url2png
   module Config
     
-    def self.api_url
-      Thread.current[:url2png_url] ||= 'http://api.url2png.com'
+    def self.api_url protocol = 'http://'
+      Thread.current[:url2png_url] ||= "#{ protocol }api.url2png.com"
     end
 
     def self.api_version

@@ -27,7 +27,7 @@ module Url2png
         token = Digest::MD5.hexdigest("#{ Url2png::Config.shared_secret }+#{ safe_url }")
 
         # build image url
-        File.join(Url2png::Config.api_url, Url2png::Config.api_version, Url2png::Config.public_key, token, dim[:size], safe_url)
+        File.join(Url2png::Config.api_url(request.protocol), Url2png::Config.api_version, Url2png::Config.public_key, token, dim[:size], safe_url)
       end
       
     end
