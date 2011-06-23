@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{url2png}
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["wout fierens"]
-  s.date = %q{2011-05-25}
+  s.date = %q{2011-06-23}
   s.description = %q{Generate screenshots from websites almost instantly at any preferred size using ruby and the url2png.com API}
   s.email = %q{wout@boysabroad.com}
   s.extra_rdoc_files = [
@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
+    ".rspec",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
@@ -29,8 +30,9 @@ Gem::Specification.new do |s|
     "lib/url2png/dimensions.rb",
     "lib/url2png/helpers/common.rb",
     "lib/url2png/rails.rb",
-    "test/helper.rb",
-    "test/test_url2png.rb",
+    "spec/helpers/common_rspec.rb",
+    "spec/spec_helper.rb",
+    "spec/url2png_spec.rb",
     "url2png.gemspec"
   ]
   s.homepage = %q{http://github.com/wout/url2png-gem}
@@ -39,8 +41,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{A ruby gem wrapping the url2png.com screenshot service API}
   s.test_files = [
-    "test/helper.rb",
-    "test/test_url2png.rb"
+    "spec/helpers/common_rspec.rb",
+    "spec/spec_helper.rb",
+    "spec/url2png_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -48,20 +51,20 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<shoulda>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.6.0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
       s.add_development_dependency(%q<rspec>, ["> 2.6.0"])
     else
-      s.add_dependency(%q<shoulda>, [">= 0"])
+      s.add_dependency(%q<rspec>, ["~> 2.6.0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_dependency(%q<rcov>, [">= 0"])
       s.add_dependency(%q<rspec>, ["> 2.6.0"])
     end
   else
-    s.add_dependency(%q<shoulda>, [">= 0"])
+    s.add_dependency(%q<rspec>, ["~> 2.6.0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
     s.add_dependency(%q<rcov>, [">= 0"])
