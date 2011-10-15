@@ -1,6 +1,17 @@
 module Url2png
   module Config
-    
+
+    MODES = %w{production placehold dummy}
+
+    def self.mode
+      @url2png_mode ||= "production"
+    end
+
+    def self.mode= mode
+      raise "Url2png error: Invalid mode, allowed #{MODES.joind(', ')}" unless MODES.include?(mode)
+      @url2png_mode ||= mode
+    end
+
     def self.api_url protocol
       @url2png_url ||= "#{ protocol }api.url2png.com"
     end
@@ -39,6 +50,6 @@ module Url2png
     def self.default_size
       @url2png_size ||= '400x400'
     end
-    
+
   end
 end

@@ -1,7 +1,7 @@
 module Url2png
   module Helpers
     module Common
-      
+
       def site_image_tag url, options = {}
         dim = Url2png::Dimensions.parse(options)
 
@@ -19,20 +19,25 @@ module Url2png
       end
 
       def site_image_url url, options = {}
-        options[:protocol] ||= 'http://'
-        
         dim = Url2png::Dimensions.parse(options)
+        case Url2png::Config.mode
+        when 'dummy'
+          "/images/dummy.png"
+        when 'placehold'
+          "http://placehold.it/#{dim[:size]}"
+        else
+          options[:protocol] ||= 'http://'
 
-        # escape the url
-        safe_url = URI.escape(url)
+          # escape the url
+          safe_url = URI.escape(url)
 
-        # generate token
-        token = Digest::MD5.hexdigest("#{ Url2png::Config.shared_secret }+#{ safe_url }")
+          # generate token
+          token = Digest::MD5.hexdigest("#{ Url2png::Config.shared_secret }+#{ safe_url }")
 
-        # build image url
-        File.join(Url2png::Config.api_url(options[:protocol]), Url2png::Config.api_version, Url2png::Config.public_key, token, dim[:size], safe_url)
+          # build image url
+          File.join(Url2png::Config.api_url(options[:protocol]), Url2png::Config.api_version, Url2png::Config.public_key, token, dim[:size], safe_url)
+        end
       end
-      
     end
   end
 end
