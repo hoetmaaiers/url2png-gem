@@ -34,28 +34,33 @@ module Url2png
         token = Digest::MD5.hexdigest("#{ Url2png::Config.shared_secret }+#{ safe_url }")
 
         # build image url
-        File.join(Url2png::Config.api_url(options[:protocol]), Url2png::Config.api_version, Url2png::Config.public_key, token, dim[:size], safe_url)
+        File.join(Url2png::Config.api_url(options[:protocol]),
+                  Url2png::Config.api_version,
+                  Url2png::Config.public_key,
+                  token,
+                  dim[:size],
+                  safe_url)
       end
 
-      private
+private
 
       def fake_url_for_image_sized dim
-        @image ||= {}
         size, width, height = dim[:size], dim[:width].to_i, dim[:height].to_i
+        path = "#{Rails.root}/app/assets/images/"
+        name = "u2p-#{size}.png"
+        file_name = path + name
 
-        if @image.has_key? size
-          @image[size]
+        if File.exist? file_name
+          return name
         else
-          path = generate_image_sized width, height
-          @image[size] = path
+          generate_image_sized width, height, path, name
         end
       end
 
-      def generate_image_sized width, height
+      def generate_image_sized width, height, path, name
         require 'png'
         png = PNG.new PNG::Canvas.new width, height, PNG::Color::Black
-        name = "u2p-#{rand(36**8).to_s(36)}.png"
-        png.save "#{Rails.root}/app/assets/images/#{name}"
+        png.save "#{path}#{name}"
         name
       end
 
