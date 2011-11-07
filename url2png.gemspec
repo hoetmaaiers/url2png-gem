@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{url2png}
-  s.version = "0.0.6"
+  s.version = "0.0.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["wout fierens"]
-  s.date = %q{2011-06-23}
+    s.authors = ["wout fierens", "fuzzyalej"]
+  s.date = %q{2011-11-07}
   s.description = %q{Generate screenshots from websites almost instantly at any preferred size using ruby and the url2png.com API}
   s.email = %q{wout@boysabroad.com}
   s.extra_rdoc_files = [
@@ -45,6 +45,9 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb",
     "spec/url2png_spec.rb"
   ]
+
+  s.add_dependency(%q<png>, [">= 0"])
+  s.add_dependency(%q<RubyInline>, [">= 0"])
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
