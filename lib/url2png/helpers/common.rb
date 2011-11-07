@@ -61,7 +61,7 @@ private
         require 'png'
         png = PNG.new PNG::Canvas.new width, height, PNG::Color::Black
         png.save "#{path}#{name}"
-        name
+        "/assets/#{name}"
       end
 
     end
