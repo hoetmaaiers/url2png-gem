@@ -51,7 +51,7 @@ private
         file_name = path + name
 
         if File.exist? file_name
-          return name
+          return "/assets/#{name}"
         else
           generate_image_sized width, height, path, name
         end
