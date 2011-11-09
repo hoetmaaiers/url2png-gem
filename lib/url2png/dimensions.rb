@@ -2,13 +2,19 @@ module Url2png
   module Dimensions
     
     def self.parse options
-      size = options[:size] || Url2png::Config.default_size
-
-      {
-        :size   => size,
-        :width  => options[:width]  || size.split('x')[0],
-        :height => options[:height] || size.split('x')[1]
-      }
+      if options[:size]
+        {
+          :size   => size,
+          :width  => size.split('x')[0],
+          :height => size.split('x')[1]
+        }
+      else
+        {
+          :size   => nil,
+          :width  => options[:width],
+          :height => options[:height]
+        }
+      end
     end
     
   end

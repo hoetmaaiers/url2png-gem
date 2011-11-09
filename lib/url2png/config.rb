@@ -6,7 +6,7 @@ module Url2png
     end
 
     def self.api_version
-      Thread.current[:url2png_version] ||= 'v3'
+      Thread.current[:url2png_version] ||= 'v4'
     end
 
     # public key setter and getter
@@ -32,14 +32,5 @@ module Url2png
 
       Thread.current[:url2png_secret]
     end
-
-    # size
-    def self.default_size= size
-      Thread.current[:url2png_size] ||= size
-    end
-    def self.default_size
-      Thread.current[:url2png_size] ||= '400x400'
-    end
-    
   end
 end
