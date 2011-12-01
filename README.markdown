@@ -20,7 +20,17 @@ First define your public key and shared secret:
     Url2png::Config.public_key = 'PXXXXXXXXXXXXX'
     Url2png::Config.shared_secret = 'SXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
-In Rails you probably want to do that in your application.rb file.
+If you are generating local urls in development you can use a placeholder or dummy image.
+This is done by setting the mode:
+
+    Url2png::Config.mode = :dummy if Rails.env.development?
+
+Options are:
+  - :production (default; will use the url2png api to generate thumbs)
+  - :placehold (will generate an image at http://placehold.it)
+  - :dummy (will give a base64 data image)
+
+In Rails you probably want to do configuration in an initializer.
 
 
 ### Helpers
