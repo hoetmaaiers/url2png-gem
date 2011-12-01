@@ -53,7 +53,7 @@ To only get the image url:
 
 Options are:
 
-* :size<br>
+* **:size**<br>
   This is a proportion bounding box.<br>
   Thumbnails will be resized to fit within this box.<br>
   default: 'ORIGINAL'<br>
@@ -61,9 +61,9 @@ Options are:
     + :size => '500x500'
     + :size => 'ORIGINAL'
 
-* :thumbnail (alias for :size)
+* **:thumbnail** (alias for :size)
 
-* :browser_size<br>
+* **:browser_size**<br>
   Set the initial browser screen size.<br>
   default: '1024x768'<br>
   min: '200x200'<br>
@@ -71,14 +71,14 @@ Options are:
   example:
     + :browser_size => '1024x2500'
 
-* :delay<br>
+* **:delay**<br>
   Extra delay (in seconds) forced between page load and screenshot.<br>
   min: 1<br>
   max: 5<br>
   example:
     + :delay => 2
 
-* :fullscreen<br>
+* **:fullscreen**<br>
   When true, Will attempt to capture entire document canvas.<br>
   Will never return screenshot smaller than "Initial Screen Size".<br>
   default: false<br>
@@ -90,7 +90,7 @@ Original API docs: https://url2png.com/doc/
 
 
 ### API Version
-From version 0.1.0 and up this gem is using version 4 of the url2png API.
+From version 0.1.0 and up this gem is using version 4 of the url2png API.<br>
 Version 0.0.7 is the last one using version 3 of the API.
 
 
