@@ -76,6 +76,7 @@ Options are:
 
 **:delay**<br>
   Extra delay (in seconds) forced between page load and screenshot.<br>
+  default: 1<br>
   min: 1<br>
   max: 5<br>
   example:
@@ -92,6 +93,7 @@ Options are:
 
 
 Original API docs: https://url2png.com/doc/
+
 
 
 ### API Version
