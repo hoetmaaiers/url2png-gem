@@ -2,12 +2,19 @@ module Url2png
   module Dimensions
     
     def self.parse options
-      size = options[:size] || Url2png::Config.default_size
-
+      # convert tumbnail to size to ensure compatibility with older gem versions
+      options[:size] ||= options[:thumbnail]
+      
+      # distill image size
+      size   = (options[:size]  || Url2png::Config.default_size).split('x')
+      width  = options[:width]  || size[0]
+      height = options[:height] || size[1]
+      
+      # return dimensions hash
       {
-        :size   => size,
-        :width  => options[:width]  || size.split('x')[0],
-        :height => options[:height] || size.split('x')[1]
+        :size   => "#{ width }x#{ height }",
+        :width  => width,
+        :height => height
       }
     end
     

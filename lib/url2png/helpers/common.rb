@@ -1,24 +1,36 @@
 module Url2png
   module Helpers
     module Common
-
+      
+      # complete image tag
       def site_image_tag url, options = {}
+        # parse size
         dim = Url2png::Dimensions.parse(options)
-
+        
+        # ensure image alt
+        alt = options.key?(:alt) ? options.delete(:alt) : url
+        
+        # filter options
+        url2png_options = {}
+        [:size, :thumbnail, :browser_size, :delay, :fullscreen].each do |key|
+          url2png_options[key] = options.delete(key) if options.key?(key)
+        end
+        
         # build image tag
         img =  '<img'
-        img << " src='#{ site_image_url(url, options) }'"
-        img << " alt='#{ options[:alt] || url }'"
+        img << " src='#{ site_image_url(url, url2png_options) }'"
+        img << " alt='#{ alt }'"
         img << " width='#{ dim[:width] }'"
         img << " height='#{ dim[:height] }'"
         options.each_pair do |k, v|
           img << " #{ k }='#{ v }'" unless v.nil? || v == ''
         end
         img << ' />'
-        img.html_safe
       end
       
+      # only the url for the image
       def site_image_url url, options = {}
+        # parse size
         dim = Url2png::Dimensions.parse(options)
         
         case Url2png::Config.mode
@@ -60,12 +72,27 @@ module Url2png
           # generate token
           token = Digest::MD5.hexdigest("#{ Url2png::Config.shared_secret }+#{ safe_url }")
           
+          # build options portion of URL
+          url_options = []
+          url_options << "t#{ dim[:size]             }" if dim[:size]
+          url_options << "s#{ options[:browser_size] }" if options[:browser_size]
+          url_options << "d#{ options[:delay]        }" if options[:delay]
+          url_options << "FULL"                         if options[:fullscreen]
+          url_options_string = url_options.join('-')
+          
           # build image url
-          File.join(Url2png::Config.api_url(options[:protocol]), Url2png::Config.api_version, Url2png::Config.public_key, token, dim[:size], safe_url)
+          File.join(
+            Url2png::Config.api_url(options[:protocol]),
+            Url2png::Config.api_version,
+            Url2png::Config.public_key,
+            token,
+            url_options_string,
+            safe_url
+          )
         end
         
       end
-        
+      
     end
   end
 end

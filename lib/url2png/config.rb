@@ -20,7 +20,7 @@ module Url2png
     end
 
     def self.api_version
-      @url2png_version ||= 'v3'
+      @url2png_version ||= 'v4'
     end
 
     # public key setter and getter
