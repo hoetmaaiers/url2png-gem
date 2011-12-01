@@ -53,37 +53,42 @@ To only get the image url:
 
 Options are:
 
-* **:size**<br>
+**:size**<br>
   This is a proportion bounding box.<br>
   Thumbnails will be resized to fit within this box.<br>
   default: 'ORIGINAL'<br>
   examples:
-    + :size => '500x500'
-    + :size => 'ORIGINAL'
 
-* **:thumbnail** (alias for :size)
+    site_image_tag url, :size => '500x500'
 
-* **:browser_size**<br>
+    site_image_tag url, :size => 'ORIGINAL'
+
+**:thumbnail** (alias for :size)
+
+**:browser_size**<br>
   Set the initial browser screen size.<br>
   default: '1024x768'<br>
   min: '200x200'<br>
   max: '4000x4000'<br>
   example:
-    + :browser_size => '1024x2500'
+    
+    site_image_tag url, :size => '300x200', :browser_size => '1024x2500'
 
-* **:delay**<br>
+**:delay**<br>
   Extra delay (in seconds) forced between page load and screenshot.<br>
   min: 1<br>
   max: 5<br>
   example:
-    + :delay => 2
 
-* **:fullscreen**<br>
+    site_image_tag url, :size => '300x200', :delay => 2
+
+**:fullscreen**<br>
   When true, Will attempt to capture entire document canvas.<br>
   Will never return screenshot smaller than "Initial Screen Size".<br>
   default: false<br>
   example:
-    + :fullscreen => true
+
+    site_image_tag url, :size => '300x200', :fullscreen => true
 
 
 Original API docs: https://url2png.com/doc/
