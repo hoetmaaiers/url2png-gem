@@ -23,11 +23,11 @@ First define your public key and shared secret:
 If you are generating local urls in development you can use a placeholder or dummy image.
 This is done by setting the mode:
 
-    Url2png::Config.mode = :dummy if Rails.env.development?
+    Url2png::Config.mode = :placehold if Rails.env.development?
 
 Options are:
-  - :production (default; will use the url2png api to generate thumbs)
-  - :placehold (will generate an image at http://placehold.it)
+  - :production (default; will use the url2png api to generate images)
+  - :placehold (will generate images at http://placehold.it)
   - :dummy (will give a grey base64 data image)
 
 In Rails you probably want to do configuration in an initializer.
