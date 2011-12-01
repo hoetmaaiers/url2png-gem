@@ -28,7 +28,7 @@ This is done by setting the mode:
 Options are:
   - :production (default; will use the url2png api to generate thumbs)
   - :placehold (will generate an image at http://placehold.it)
-  - :dummy (will give a base64 data image)
+  - :dummy (will give a grey base64 data image)
 
 In Rails you probably want to do configuration in an initializer.
 
