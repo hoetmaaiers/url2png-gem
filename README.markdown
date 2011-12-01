@@ -53,56 +53,35 @@ To only get the image url:
 
 Options are:
 
-* :size
-  
-  This is a proportion bounding box.
-  
-  Thumbnails will be resized to fit within this box.
-  
-  default: 'ORIGINAL'
-  
+* :size<br>
+  This is a proportion bounding box.<br>
+  Thumbnails will be resized to fit within this box.<br>
+  default: 'ORIGINAL'<br>
   examples:
     + :size => '500x500'
     + :size => 'ORIGINAL'
 
-
 * :thumbnail (alias for :size)
 
-
-* :browser_size
-  
-  Set the initial browser screen size.
-  
-  default: '1024x768'
-  
-  min: '200x200'
-  
-  max: '4000x4000'
-  
+* :browser_size<br>
+  Set the initial browser screen size.<br>
+  default: '1024x768'<br>
+  min: '200x200'<br>
+  max: '4000x4000'<br>
   example:
     + :browser_size => '1024x2500'
 
-
-* :delay
-  
-  Extra delay (in seconds) forced between page load and screenshot.
-  
-  min: 1
-  
-  max: 5
-  
+* :delay<br>
+  Extra delay (in seconds) forced between page load and screenshot.<br>
+  min: 1<br>
+  max: 5<br>
   example:
     + :delay => 2
 
-
-* :fullscreen
-  
-  When true, Will attempt to capture entire document canvas.
-  
-  Will never return screenshot smaller than "Initial Screen Size".
-  
-  default: false
-  
+* :fullscreen<br>
+  When true, Will attempt to capture entire document canvas.<br>
+  Will never return screenshot smaller than "Initial Screen Size".<br>
+  default: false<br>
   example:
     + :fullscreen => true
 
