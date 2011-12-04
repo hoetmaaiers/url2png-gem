@@ -1,7 +1,8 @@
 module Url2png
   module Helpers
     module Common
-      
+      extend self
+
       # complete image tag
       def site_image_tag url, options = {}
         # parse size
