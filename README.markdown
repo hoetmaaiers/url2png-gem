@@ -63,7 +63,27 @@ Options are:
 
     site_image_tag url, :size => 'ORIGINAL'
 
+  note:  
+  `:size` option no longer renders the `<img>` tag height|width. See `:img_dimensions`
+
+  disabling "Thumbnail-ing":  
+    site_image_tag url, :size => false
+    - or -
+    site_image_tag url, :thumbnail => false
+
+    #=> returns the tag without the tOPTION in the url
+
 **:thumbnail** (alias for :size)
+
+**:img_dimensions**  
+
+  Allows you to manually set the `<img>` tag height & width attributes  
+  By default, height and width dimensions are omitted
+
+  examples:  
+
+    site_image_tag url, :img_dimensions => {:height => 200, :width => 300}
+    #=> <img src='...' height='200' width='300'>
 
 **:browser_size**<br>
   Set the initial browser screen size.<br>
@@ -90,6 +110,19 @@ Options are:
   example:
 
     site_image_tag url, :size => '300x200', :fullscreen => true
+
+
+**:cache**  
+
+  When true, the gem will attempt to get the 302 redirection location, which references a "cached" url.  
+  This was the preferred method of providing Outlook safe urls, as discussed with the creator of URL2PNG.  
+  *This can take some time when executing, in personal tests, it adds about 3-4 secs to the request for a fresh url*
+
+  default: false  
+  example:
+
+    site_image_tag url, :cache => true
+    #=> <img src="http://cache.url2png.com/..../...." ... />
 
 
 Original API docs: https://url2png.com/doc/
