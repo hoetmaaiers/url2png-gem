@@ -27,7 +27,7 @@ module Url2png
           img << " #{ k }='#{ v }'" unless v.nil? || v == ''
         end
         img << ' />'
-        img.html_safe
+        (img.respond_to?(:html_safe) && img.html_safe) || img
       end
 
       # only the url for the image
