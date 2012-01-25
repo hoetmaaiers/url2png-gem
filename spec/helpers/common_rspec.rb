@@ -60,6 +60,14 @@ describe Url2png, "site_image_url" do
 
     it { should match /\/t500x300\// }
   end
+
+  [:thumbnail, :size].each do |t|
+    context "when #{t} option is false" do
+      subject { SandBox.site_image_url "http://google.com", t.to_sym => false}
+
+      it { should_not match /\/t\d+x\d+\// }
+    end
+  end
 end
 
 
