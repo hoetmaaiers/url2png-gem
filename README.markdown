@@ -67,6 +67,7 @@ Options are:
   `:size` option no longer renders the `<img>` tag height|width. See `:img_dimensions`
 
   disabling "Thumbnail-ing":  
+
     site_image_tag url, :size => false
     - or -
     site_image_tag url, :thumbnail => false
