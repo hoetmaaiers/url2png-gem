@@ -7,16 +7,16 @@ module Url2png
       def site_image_tag url, options = {}
         # parse size
         dim = Url2png::Dimensions.parse(options)
-        
+
         # ensure image alt
         alt = options.key?(:alt) ? options.delete(:alt) : url
-        
+
         # filter options
         url2png_options = {}
-        [:size, :thumbnail, :browser_size, :delay, :fullscreen].each do |key|
+        [:size, :thumbnail, :browser_size, :delay, :fullscreen, :protocol].each do |key|
           url2png_options[key] = options.delete(key) if options.key?(key)
         end
-        
+
         # build image tag
         img =  '<img'
         img << " src='#{ site_image_url(url, url2png_options) }'"
@@ -27,14 +27,14 @@ module Url2png
           img << " #{ k }='#{ v }'" unless v.nil? || v == ''
         end
         img << ' />'
-        img.html_safe
+        img.respond_to?(:html_safe) ? img.html_safe : img
       end
-      
+
       # only the url for the image
       def site_image_url url, options = {}
         # parse size
         dim = Url2png::Dimensions.parse(options)
-        
+
         case Url2png::Config.mode
         when 'dummy'
           'data:image/png;base64,
@@ -61,19 +61,19 @@ module Url2png
           ICAgICAgICAgICAgPHJkZjpCYWcvPgogICAgICAgICA8L2RjOnN1YmplY3Q+CiAgICAgIDwvcmRm
           OkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgrlPw1BAAAAFElEQVQIHWM8
           fPjwfwYgYAIRIAAAMrgDTJyW2igAAAAASUVORK5CYII='.gsub(/\n/,'')
-          
+
         when 'placehold'
           "http://placehold.it/#{ dim[:size] }"
-          
+
         else
-          options[:protocol] ||= 'http://'
-          
+          Url2png::Config.api_protocol = options[:protocol] if options.key?(:protocol)
+
           # escape the url
           safe_url = URI.escape(url)
-          
+
           # generate token
           token = Digest::MD5.hexdigest("#{ Url2png::Config.shared_secret }+#{ safe_url }")
-          
+
           # build options portion of URL
           url_options = []
           url_options << "t#{ dim[:size]             }" if dim[:size]
@@ -81,10 +81,10 @@ module Url2png
           url_options << "d#{ options[:delay]        }" if options[:delay]
           url_options << "FULL"                         if options[:fullscreen]
           url_options_string = url_options.join('-')
-          
+
           # build image url
           File.join(
-            Url2png::Config.api_url(options[:protocol]),
+            Url2png::Config.api_url,
             Url2png::Config.api_version,
             Url2png::Config.public_key,
             token,
@@ -92,9 +92,9 @@ module Url2png
             safe_url
           )
         end
-        
+
       end
-      
+
     end
   end
 end
