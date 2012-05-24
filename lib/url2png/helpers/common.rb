@@ -8,12 +8,12 @@ module Url2png
         # parse size
         dim = Url2png::Dimensions.parse(options)
         
-        # ensure image alt
-        alt = options.key?(:alt) ? options.delete(:alt) : url
-        
         # ensure thumbnail_max_....
         options[:thumbnail_max_width] ||= dim[:width]
         options[:thumbnail_max_height] ||= dim[:height]
+        
+        # ensure image alt
+        alt = options.key?(:alt) ? options.delete(:alt) : url
         
         # build image tag
         img =  '<img'
