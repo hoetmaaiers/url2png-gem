@@ -3,10 +3,10 @@ module Url2png
     
     def self.parse options
       # convert tumbnail to size to ensure compatibility with older gem versions
-      options[:size] ||= options[:thumbnail]
+      options[:size] ||= "#{options[:thumbnail_max_width]}x#{options[:thumbnail_max_height]}"
       
       # distill image size
-      size   = (options[:size]  || Url2png::Config.default_size).split('x')
+      size   = (options[:size]  || Url2png.default_size).split('x')
       width  = options[:width]  || size[0]
       height = options[:height] || size[1]
       

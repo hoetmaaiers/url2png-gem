@@ -11,21 +11,17 @@ module Url2png
         # ensure image alt
         alt = options.key?(:alt) ? options.delete(:alt) : url
         
-        # filter options
-        url2png_options = {}
-        [:size, :thumbnail, :browser_size, :delay, :fullscreen].each do |key|
-          url2png_options[key] = options.delete(key) if options.key?(key)
-        end
+
         
         # build image tag
         img =  '<img'
-        img << " src='#{ site_image_url(url, url2png_options) }'"
+        img << " src='#{ site_image_url(url, options) }'"
         img << " alt='#{ alt }'"
         img << " width='#{ dim[:width] }'"
         img << " height='#{ dim[:height] }'"
-        options.each_pair do |k, v|
-          img << " #{ k }='#{ v }'" unless v.nil? || v == ''
-        end
+        # options.each_pair do |k, v|
+        #   img << " #{ k }='#{ v }'" unless v.nil? || v == ''
+        # end
         img << ' />'
         img.html_safe
       end
@@ -33,9 +29,9 @@ module Url2png
       # only the url for the image
       def site_image_url url, options = {}
         # parse size
-        dim = Url2png::Dimensions.parse(options)
+        #dim = Url2png::Dimensions.parse(options)
         
-        case Url2png::Config.mode
+        case Url2png.mode
         when 'dummy'
           'data:image/png;base64,
           iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAADHmlDQ1BJQ0MgUHJvZmlsZQAAeAGF
@@ -65,34 +61,29 @@ module Url2png
         when 'placehold'
           "http://placehold.it/#{ dim[:size] }"
           
-        else
-          options[:protocol] ||= 'http://'
+        else                    
+          # build parameters portion of URL
+          query = {
+            :url       => url,
+            :force     => options[:force],     # [false,always,timestamp] Default: false
+            :fullpage  => options[:fullpage],  # [true,false] Default: false
+            :thumbnail_max_width => options[:thumbnail_max_width], # scaled img width px; Default no-scaling
+            :thumbnail_max_height => options[:thumbnail_max_height],
+            :viewport  => options[:viewport],  # Max 5000x5000; Default 1280x1024
+          }
           
-          # escape the url
-          safe_url = URI.escape(url)
+          query_string = query.
+              sort_by {|s| s[0].to_s }. # sort query by keys for uniformity
+              select {|s| s[1] }.       # skip empty options
+              map {|s| s.map {|v| CGI::escape(v.to_s) }.join('=') }. # escape keys & vals
+              join('&')
           
           # generate token
-          token = Digest::MD5.hexdigest("#{ Url2png::Config.shared_secret }+#{ safe_url }")
+          token = Digest::MD5.hexdigest(query_string + Url2png.private_key)
           
-          # build options portion of URL
-          url_options = []
-          url_options << "t#{ dim[:size]             }" if dim[:size]
-          url_options << "s#{ options[:browser_size] }" if options[:browser_size]
-          url_options << "d#{ options[:delay]        }" if options[:delay]
-          url_options << "FULL"                         if options[:fullscreen]
-          url_options_string = url_options.join('-')
           
-          # build image url
-          File.join(
-            Url2png::Config.api_url(options[:protocol]),
-            Url2png::Config.api_version,
-            Url2png::Config.public_key,
-            token,
-            url_options_string,
-            safe_url
-          )
+          "http://beta.url2png.com/v6/#{Url2png.api_key}/#{token}/png/?#{query_string}"
         end
-        
       end
       
     end
