@@ -8,7 +8,9 @@ module Url2png
         # parse size
         dim = Url2png::Dimensions.parse(options)
         
-
+        # ensure thumbnail_max_....
+        options[:thumbnail_max_width] ||= dim[:width]
+        options[:thumbnail_max_height] ||= dim[:height]
         
         # ensure image alt
         alt = options.key?(:alt) ? options.delete(:alt) : url
@@ -17,8 +19,8 @@ module Url2png
         img =  '<img'
         img << " src='#{ site_image_url(url, options) }'"
         img << " alt='#{ alt }'"
-        img << " width='#{ dim[:width] }'"
-        img << " height='#{ dim[:height] }'"
+        # img << " width='#{ dim[:width] }'"
+        # img << " height='#{ dim[:height] }'"
         # options.each_pair do |k, v|
         #   img << " #{ k }='#{ v }'" unless v.nil? || v == ''
         # end
