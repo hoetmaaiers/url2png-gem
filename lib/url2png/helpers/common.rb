@@ -11,7 +11,9 @@ module Url2png
         # ensure image alt
         alt = options.key?(:alt) ? options.delete(:alt) : url
         
-
+        # ensure thumbnail_max_....
+        options[:thumbnail_max_width] ||= dim[:width]
+        options[:thumbnail_max_height] ||= dim[:height]
         
         # build image tag
         img =  '<img'
