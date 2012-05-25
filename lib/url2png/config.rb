@@ -4,7 +4,6 @@ module Url2png
   # modes
   MODES = %w{production placehold dummy}
   
-  
   def config c = {}
     # SET
     #   api_key
@@ -45,11 +44,11 @@ module Url2png
   end
 
   def mode
-    @mode ||= 'production'
+    @mode ||= 'production' # default: production
   end
   
   def api_version
-    @version ||= 'v6' #defaults on v6
+    @version ||= 'v6' #default: v6
   end
   
   def default_size

@@ -5,13 +5,7 @@ module Url2png
 
       # complete image tag
       def site_image_tag url, options = {}
-        # parse size
-        dim = Url2png::Dimensions.parse(options)
-        
-        # ensure thumbnail_max_....
-        options[:thumbnail_max_width] ||= dim[:width]
-        options[:thumbnail_max_height] ||= dim[:height]
-        
+                        
         # ensure image alt
         alt = options.key?(:alt) ? options.delete(:alt) : url
         
@@ -19,19 +13,12 @@ module Url2png
         img =  '<img'
         img << " src='#{ site_image_url(url, options) }'"
         img << " alt='#{ alt }'"
-        # img << " width='#{ dim[:width] }'"
-        # img << " height='#{ dim[:height] }'"
-        # options.each_pair do |k, v|
-        #   img << " #{ k }='#{ v }'" unless v.nil? || v == ''
-        # end
         img << ' />'
         img.html_safe
       end
       
       # only the url for the image
       def site_image_url url, options = {}
-        # parse size
-        #dim = Url2png::Dimensions.parse(options)
         
         case Url2png.mode
         when 'dummy'
