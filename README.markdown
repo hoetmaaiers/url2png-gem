@@ -17,13 +17,25 @@ Any Ruby on Rails developer who wants/needs to generate screenshots from sites u
 
 First define your public key and shared secret:
 
-    Url2png::Config.public_key = 'PXXXXXXXXXXXXX'
-    Url2png::Config.shared_secret = 'SXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    Url2png.api_key = 'PXXXXXXXXXXXXX'
+    Url2png.privat_key = 'SXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
+##### version
+You can define the api version if you want to use an older version of the url2png api. 
+	
+	Url2png.api_version = "v4"
+
+Available versions:
+
+* v6 (default)
+* v4
+
+
+##### mode
 If you are generating local urls in development you can use a placeholder or dummy image.
 This is done by setting the mode:
 
-    Url2png::Config.mode = :placehold if Rails.env.development?
+    Url2png.mode = :placehold if Rails.env.development?
 
 Options are:
 
@@ -40,7 +52,52 @@ Generate an image tag:
 
     site_image_tag url, [options]
 
-Options are the same as the image_tag in Rails.
+
+Options differ by version!
+
+
+### Version 6
+
+##### Thumbnail
+Constrain screenshot based on width or height or both.<br>
+default: no resizing
+		
+	= site_image_tag 'http://www.zwartopwit.com', :thumbnail_max_width => 500, :thumbnail_max_height => 500
+	
+
+##### Viewport
+Set viewport dimensions, adjust to your hearts content.<br>
+default: 1480x1037
+	
+	= site_image_tag 'http://www.zwartopwit.com', :viewport => "1024x900"
+
+
+##### Fullpage
+Will attempt to capture entire document canvas.<br>
+default: false
+	
+	= site_image_tag 'http://www.zwartopwit.com', :fullpage => true
+	
+
+##### Delay
+Extra delay (in seconds) forced between page load and screenshot.<br>
+default: 1<br>
+min: 1<br>
+max: 5<br>
+
+example:
+		
+	site_image_tag url, :size => '300x200', :delay => 2
+	
+	
+##### Force
+Forces a fresh screenshot with each request, overwriting the previous copy.<br>
+**You will be charged for every request made using the force option.**
+	
+	= site_image_tag 'http://www.zwartopwit.com', :force => true
+
+	
+### Version 4
 
 By default the size is set to 400 x 400 px.
 To generate an image with a specific size:
@@ -53,52 +110,45 @@ To only get the image url:
 
 Options are:
 
-**:size**<br>
-  This is a proportion bounding box.<br>
-  Thumbnails will be resized to fit within this box.<br>
-  default: 'ORIGINAL'<br>
-  examples:
+##### Size
+This is a proportion bounding box.<br>
+Thumbnails will be resized to fit within this box.<br>
+default: 'ORIGINAL'<br>
+examples:
 
     site_image_tag url, :size => '500x500'
 
     site_image_tag url, :size => 'ORIGINAL'
 
-**:thumbnail** (alias for :size)
+##### Thumbnail (alias for :size)
 
-**:browser_size**<br>
-  Set the initial browser screen size.<br>
-  default: '1024x768'<br>
-  min: '200x200'<br>
-  max: '4000x4000'<br>
-  example:
+##### Browser size
+Set the initial browser screen size.<br>
+default: '1024x768'<br>
+min: '200x200'<br>
+max: '4000x4000'<br>
+example:
     
     site_image_tag url, :size => '300x200', :browser_size => '1024x2500'
 
-**:delay**<br>
-  Extra delay (in seconds) forced between page load and screenshot.<br>
-  default: 1<br>
-  min: 1<br>
-  max: 5<br>
-  example:
+##### Delay
+Extra delay (in seconds) forced between page load and screenshot.<br>
+default: 1<br>
+min: 1<br>
+max: 5<br>
+example:
 
-    site_image_tag url, :size => '300x200', :delay => 2
+	site_image_tag url, :size => '300x200', :delay => 2
 
-**:fullscreen**<br>
-  When true, Will attempt to capture entire document canvas.<br>
-  Will never return screenshot smaller than "Initial Screen Size".<br>
-  default: false<br>
-  example:
+##### Fullscreen
+When true, Will attempt to capture entire document canvas.<br>
+Will never return screenshot smaller than "Initial Screen Size".<br>
+default: false<br>
+
+example:
 
     site_image_tag url, :size => '300x200', :fullscreen => true
 
-
-Original API docs: https://url2png.com/doc/
-
-
-
-### API Version
-From version 0.1.0 and up this gem is using version 4 of the url2png API.<br>
-Version 0.0.7 is the last one using version 3 of the API.
 
 
 ## Important
@@ -118,6 +168,12 @@ Note that this gem is still under development.
 * Commit and push until you are happy with your contribution
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+Original API docs: 
+
+* v4: https://url2png.com/doc/
+* v6: http://staging.url2png.com/docs/v6.php
+
 
 ## Copyright
 
