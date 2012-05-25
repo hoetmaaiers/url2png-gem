@@ -5,7 +5,9 @@ module Url2png
 
       # complete image tag
       def site_image_tag url, options = {}
-                        
+        # parse size
+        dim = Url2png::Dimensions.parse(options)
+                                
         # ensure image alt
         alt = options.key?(:alt) ? options.delete(:alt) : url
         
@@ -13,6 +15,8 @@ module Url2png
         img =  '<img'
         img << " src='#{ site_image_url(url, options) }'"
         img << " alt='#{ alt }'"
+        img << " width='#{ dim[:width] }'" if options[:size]
+        img << " height='#{ dim[:height] }'" if options[:size]
         options.each_pair do |k, v|
           img << " #{ k }=#{ v }" unless v.nil? || v == ''
         end
