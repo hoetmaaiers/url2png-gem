@@ -21,8 +21,8 @@ module Url2png
       when :mode
         raise "Url2png error: Invalid mode, only #{ MODES.join(', ') } are allowed" unless MODES.include?(value.to_s)
         @mode = value
-      when :version
-        @version = value
+      when :api_version
+        @api_version = value
       end
     end
   end
@@ -39,16 +39,12 @@ module Url2png
     @private_key
   end
 
-  def api_url
-    @api_url ||= "http://beta.url2png.com"
-  end
-
   def mode
     @mode ||= 'production' # default: production
   end
   
   def api_version
-    @version ||= 'v6' #default: v6
+    @api_version ||= 'v6' #default: v6
   end
   
   def default_size
