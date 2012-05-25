@@ -18,7 +18,7 @@ Jeweler::Tasks.new do |gem|
   gem.summary = %Q{A ruby gem wrapping the url2png.com screenshot service API}
   gem.description = %Q{Generate screenshots from websites almost instantly at any preferred size using ruby and the url2png.com API}
   gem.email = "wout@impinc.co.uk"
-  gem.authors = ["wout fierens", "fuzzyalej", "ceritium", "lukemelia"]
+  gem.authors = ["wout fierens", "fuzzyalej", "ceritium", "lukemelia", "robinhoudmeyers"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
   #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
