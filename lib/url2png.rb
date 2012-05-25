@@ -1,4 +1,3 @@
-require 'uri'
 require 'digest'
 require 'cgi' unless defined?(CGI)
 
