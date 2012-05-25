@@ -1,5 +1,4 @@
 require 'uri'
-require 'digest'
 require 'cgi' unless defined?(CGI)
 
 require 'url2png/config'
