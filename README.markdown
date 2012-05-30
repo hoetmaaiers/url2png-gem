@@ -28,7 +28,7 @@ You can define the api version if you want to use an different version of the ur
 Available versions:
 
 * v4 (default)
-* v6
+* v6 (in beta, only for enabled users)
 
 
 ##### mode
