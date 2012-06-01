@@ -4,7 +4,7 @@ module Url2png
       extend self
 
       # complete image tag
-      def site_image_tag url, options = {}
+      def url2png_image_tag url, options = {}
         # parse size
         dim = Url2png::Dimensions.parse(options)
                                 
