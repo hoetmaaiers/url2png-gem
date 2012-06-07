@@ -6,9 +6,8 @@ A Ruby gem wrapping the url2png.com API.
 ## Who should use it?
 Any Ruby on Rails developer who wants/needs to generate screenshots from sites using url2png.com.
 
-## Usage
 
-### Installation
+## Installation
 
     gem install url2png
 
@@ -48,7 +47,7 @@ Options are:
 In Rails you probably want to do configuration in an initializer.
 
 
-### Helpers
+## Usage
 
 Generate an image tag:
 
