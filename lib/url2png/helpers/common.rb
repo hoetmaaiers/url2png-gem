@@ -28,7 +28,7 @@ module Url2png
       
       
       def check_options options, options_available
-        # filter out for only the available options
+        # filter out unavailable options
         options = options.select do |key, value|
           if options_available.include? key 
             true
