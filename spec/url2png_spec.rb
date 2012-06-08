@@ -29,4 +29,21 @@ describe "Url2png" do
       expect {Url2png.config({mode: "invalid mode"})}.to raise_error
     end
   end
+  
+  describe "v3" do
+    it "should generate a valid token for v3" do
+      Url2png.config ({api_key: 'api_key', private_key: 'private_key', api_version: 'v3'})
+      Url2png.token('google.com').should eq '1bf25a84efbd998f2b9f5b4f1b0ad6eb'
+    end
+    
+    it "should generate a valid token for v4" do
+      Url2png.config ({api_key: 'api_key', private_key: 'private_key', api_version: 'v4'})
+      Url2png.token('google.com').should eq '1bf25a84efbd998f2b9f5b4f1b0ad6eb'
+    end
+    
+    it "should generate a valid token for v6" do
+      Url2png.config ({api_key: 'api_key', private_key: 'private_key', api_version: 'v6'})
+      Url2png.token('google.com').should eq 'a6bcacefb7e7b1a89ecd619af960b3b8'
+    end
+  end
 end

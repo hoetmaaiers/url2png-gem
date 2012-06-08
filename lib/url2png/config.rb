@@ -41,11 +41,28 @@ module Url2png
     @mode ||= 'production' # default: production
   end
   
+  def api_version=api_version
+    @api_version = api_version || 'v4'
+  end
+  
   def api_version
-    @api_version ||= 'v3' #default: v3
+    @api_version || 'v4' #default: v4
+  end
+  
+  def default_size=default_size
+    @default_size = default_size || "400x400"
   end
   
   def default_size
-    @default_size ||= "400x400"
+    @default_size || "400x400"
+  end
+  
+  def token param
+    case self.api_version
+    when 'v6'
+      Digest::MD5.hexdigest("#{param}#{self.private_key}")
+    when 'v4', 'v3'
+      Digest::MD5.hexdigest("#{self.private_key}+#{param}")
+    end
   end
 end
