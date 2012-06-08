@@ -51,7 +51,7 @@ In Rails you probably want to do configuration in an initializer.
 
 Generate an image tag:
 
-    url2png_image_tag url, [options]
+    url2png_image_tag [options]
 
 
 Options differ by version!
@@ -63,21 +63,25 @@ Options differ by version!
 Constrain screenshot based on width or height or both.<br>
 default: no resizing
 		
-	= url2png_image_tag 'http://www.zwartopwit.com', :thumbnail_max_width => 500, :thumbnail_max_height => 500
+	url2png_image_tag :url => 'http://www.zwartopwit.com', 
+						:thumbnail_max_width => 500, 
+						:thumbnail_max_height => 500
 	
 
 ##### Viewport
 Set viewport dimensions, adjust to your hearts content.<br>
 default: 1480x1037
 	
-	= url2png_image_tag 'http://www.zwartopwit.com', :viewport => "1024x900"
+	url2png_image_tag :url => 'http://www.zwartopwit.com', 
+						:viewport => "1024x900"
 
 
 ##### Fullpage
 Will attempt to capture entire document canvas.<br>
 default: false
 	
-	= url2png_image_tag 'http://www.zwartopwit.com', :fullpage => true
+	url2png_image_tag :url => 'http://www.zwartopwit.com', 
+					  :fullpage => true
 	
 
 ##### Delay
@@ -88,14 +92,17 @@ max: 5<br>
 
 example:
 		
-	url2png_image_tag url, :size => '300x200', :delay => 2
+	url2png_image_tag :url => "http://www.zwartopwit.com", 
+					  :size => '300x200', 
+					  :delay => 2
 	
 	
 ##### Force
 Forces a fresh screenshot with each request, overwriting the previous copy.<br>
 **You will be charged for every request made using the force option.**
 	
-	= url2png_image_tag 'http://www.zwartopwit.com', :force => true
+	= url2png_image_tag :url => 'http://www.zwartopwit.com', 
+						:force => true
 
 	
 ### Version 4
@@ -103,11 +110,13 @@ Forces a fresh screenshot with each request, overwriting the previous copy.<br>
 By default the size is set to 400 x 400 px.
 To generate an image with a specific size:
 
-    url2png_image_tag url, :size => '300x200'
+    url2png_image_tag :url => "http://www.zwartopwit.com", 
+    				  :size => '300x200'
 
 To only get the image url:
 
-    site_image_url url, :size => '300x200'
+    site_image_url :url => "http://www.zwartopwit.com", 
+    			   :size => '300x200'
 
 Options are:
 
@@ -117,9 +126,11 @@ Thumbnails will be resized to fit within this box.<br>
 default: 'ORIGINAL'<br>
 examples:
 
-    url2png_image_tag url, :size => '500x500'
+    url2png_image_tag :url => "http://www.zwartopwit.com", 
+    				  :size => '500x500'
 
-    url2png_image_tag url, :size => 'ORIGINAL'
+    url2png_image_tag :url => "http://www.zwartopwit.com", 
+    				  :size => 'ORIGINAL'
 
 ##### Thumbnail (alias for :size)
 
@@ -130,7 +141,9 @@ min: '200x200'<br>
 max: '4000x4000'<br>
 example:
     
-    url2png_image_tag url, :size => '300x200', :browser_size => '1024x2500'
+    url2png_image_tag :url => "http://www.zwartopwit.com", 
+    				  :size => '300x200', 
+    				  :browser_size => '1024x2500'
 
 ##### Delay
 Extra delay (in seconds) forced between page load and screenshot.<br>
@@ -139,7 +152,9 @@ min: 1<br>
 max: 5<br>
 example:
 
-	url2png_image_tag url, :size => '300x200', :delay => 2
+	url2png_image_tag :url => "http://www.zwartopwit.com", 
+					  :size => '300x200', 
+					  :delay => 2
 
 ##### Fullscreen
 When true, Will attempt to capture entire document canvas.<br>
@@ -148,7 +163,9 @@ default: false<br>
 
 example:
 
-    url2png_image_tag url, :size => '300x200', :fullscreen => true
+    url2png_image_tag :url => "http://www.zwartopwit.com", 
+    				  :size => '300x200', 
+    				  :fullscreen => true
 
 
 
