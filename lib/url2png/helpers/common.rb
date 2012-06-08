@@ -79,18 +79,10 @@ module Url2png
               if options_available.include? key 
                 true
               else
+                # size is a special option, only usable in the gem
                 raise  "\"#{key}\" is not a valid option" unless key == :size
               end
             end
-                          
-            # query = {
-            #   :url       => url,
-            #   :force     => options[:force],     # [false,always,timestamp] Default: false
-            #   :fullpage  => options[:fullpage],  # [true,false] Default: false
-            #   :thumbnail_max_width => options[:thumbnail_max_width], # scaled img width px; Default no-scaling
-            #   :thumbnail_max_height => options[:thumbnail_max_height],
-            #   :viewport  => options[:viewport],  # Max 5000x5000; Default 1280x1024
-            # }
           
             query_string = options.
                 sort_by {|s| s[0].to_s }. # sort query by keys for uniformity
