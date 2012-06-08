@@ -121,6 +121,32 @@ module Url2png
               url_options_string,
               safe_url
             )
+            
+            when 'v3'
+              ######
+              # v3 #
+              ######
+
+              # http://api.url2png.com/v3/api_key/security_hash/bounds/url
+
+              # escape the url
+              safe_url= CGI::escape(url)
+
+              # generate token
+              token = Url2png.token safe_url
+
+              # build options portion of URL
+              bounds = "FULL" if options[:fullscreen] || Url2png.default_size
+              
+              # build image url
+              File.join(
+                "http://api.url2png.com",
+                Url2png.api_version,
+                Url2png.api_key,
+                token,
+                bounds,
+                safe_url
+              )
           end
         end
       end
