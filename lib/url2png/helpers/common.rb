@@ -26,6 +26,19 @@ module Url2png
         img.html_safe
       end
       
+      
+      def check_options options, options_available
+        # filter out for only the available options
+        options = options.select do |key, value|
+          if options_available.include? key 
+            true
+          else
+            # size is a special option, only usable in the gem
+            warn  "\"#{key}\" is not a valid option" unless key == :size
+          end
+        end
+      end
+      
       # --------------------------
       # only the url for the image
       def site_image_url options = {}
@@ -69,20 +82,12 @@ module Url2png
           when 'v6'
             ######
             # v6 #
-            ######
             # http://beta.url2png.com/v6/<APIKEY>/<TOKEN>/png/?url=google.com
+            ######
             
+            # check for unavailable options
             options_available = [:url, :force, :fullpage, :thumbnail_max_width, :thumbnail_max_height, :viewport]
-            
-            # filter out for only the available options
-            options = options.select do |key, value|
-              if options_available.include? key 
-                true
-              else
-                # size is a special option, only usable in the gem
-                raise  "\"#{key}\" is not a valid option" unless key == :size
-              end
-            end
+            options = check_options(options, options_available)
           
             query_string = options.
                 sort_by {|s| s[0].to_s }. # sort query by keys for uniformity
@@ -101,9 +106,12 @@ module Url2png
           when 'v4'
             ######
             # v4 #
+            # http://beta.url2png.com/v4/<APIKEY>/<TOKEN>/<VIEWPORT>-<THUMBNAIL>-<FULL>/<TARGET>
             ######
             
-            # http://beta.url2png.com/v4/<APIKEY>/<TOKEN>/<VIEWPORT>-<THUMBNAIL>-<FULL>/<TARGET>
+            # check for unavailable options
+            options_available = [:url, :size, :thumbnail, :browser_size, :delay, :fullscreen]
+            options = check_options(options, options_available)
             
             # escape the url
             safe_url= CGI::escape(options[:url])
