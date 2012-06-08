@@ -64,8 +64,8 @@ Constrain screenshot based on width or height or both.<br>
 default: no resizing
 		
 	url2png_image_tag :url => 'http://www.zwartopwit.com', 
-						:thumbnail_max_width => 500, 
-						:thumbnail_max_height => 500
+					  :thumbnail_max_width => 500, 
+					  :thumbnail_max_height => 500
 	
 
 ##### Viewport
@@ -73,7 +73,7 @@ Set viewport dimensions, adjust to your hearts content.<br>
 default: 1480x1037
 	
 	url2png_image_tag :url => 'http://www.zwartopwit.com', 
-						:viewport => "1024x900"
+					  :viewport => "1024x900"
 
 
 ##### Fullpage
