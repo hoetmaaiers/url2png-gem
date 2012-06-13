@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors = ["robinhoudmeyers", "wout fierens", "fuzzyalej", "ceritium", "lukemelia"]
   s.date = "2012-06-13"
   s.description = "Generate screenshots from websites almost instantly at any preferred size using ruby and the url2png.com API"
-  s.email = "wout@impinc.co.uk"
+  s.email = "houdmeyers@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.markdown"
