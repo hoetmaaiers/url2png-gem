@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["wout fierens", "fuzzyalej", "ceritium", "lukemelia", "robinhoudmeyers"]
-  s.date = "2012-05-25"
+  s.authors = ["robinhoudmeyers", "wout fierens", "fuzzyalej", "ceritium", "lukemelia"]
+  s.date = "2012-06-13"
   s.description = "Generate screenshots from websites almost instantly at any preferred size using ruby and the url2png.com API"
   s.email = "wout@impinc.co.uk"
   s.extra_rdoc_files = [
@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
     "README.markdown"
   ]
   s.files = [
+    ".DS_Store",
     ".document",
     ".rspec",
     "Gemfile",
@@ -35,7 +36,7 @@ Gem::Specification.new do |s|
     "spec/url2png_spec.rb",
     "url2png.gemspec"
   ]
-  s.homepage = "http://github.com/wout/url2png-gem"
+  s.homepage = "http://github.com/robinhoudmeyers/url2png-gem"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.17"
