@@ -179,16 +179,8 @@ Original API docs:
 
 ## Copyright
 
-Copyright (c) 2011 Wout Fierens. See LICENSE.txt for
+Copyright (c) 2011 Wout Fierens & Robin Houdmeyers. See LICENSE.txt for
 further details.
-
-
-
-
-
-
-
-
 
 
 
