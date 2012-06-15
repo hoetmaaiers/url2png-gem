@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["robinhoudmeyers", "wout fierens", "fuzzyalej", "ceritium", "lukemelia"]
-  s.date = "2012-06-13"
+  s.date = "2012-06-15"
   s.description = "Generate screenshots from websites almost instantly at any preferred size using ruby and the url2png.com API"
   s.email = "houdmeyers@gmail.com"
   s.extra_rdoc_files = [
