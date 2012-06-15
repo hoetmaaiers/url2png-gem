@@ -3,17 +3,19 @@ module Url2png
     module Common
       extend self
 
+      # ------------------
       # complete image tag
-      def site_image_tag url, options = {}
+      
+      def url2png_image_tag options = {}
         # parse size
         dim = Url2png::Dimensions.parse(options)
-                                
-        # ensure image alt
-        alt = options.key?(:alt) ? options.delete(:alt) : url
+        
+        # ensure image alt 
+        alt = options.key?(:alt) ? options.delete(:alt) : options[:url]
         
         # build image tag
         img =  '<img'
-        img << " src='#{ site_image_url(url, options) }'"
+        img << " src='#{ site_image_url(options) }'"
         img << " alt='#{ alt }'"
         img << " width='#{ dim[:width] }'" if options[:size]
         img << " height='#{ dim[:height] }'" if options[:size]
@@ -24,8 +26,22 @@ module Url2png
         img.html_safe
       end
       
+      
+      def check_options options, options_available
+        # filter out unavailable options
+        options = options.select do |key, value|
+          if options_available.include? key 
+            true
+          else
+            # size is a special option, only usable in the gem
+            warn  "\"#{key}\" is not a valid option" unless key == :size
+          end
+        end
+      end
+      
+      # --------------------------
       # only the url for the image
-      def site_image_url url, options = {}
+      def site_image_url options = {}
         # parse size
         dim = Url2png::Dimensions.parse(options)
         
@@ -66,20 +82,14 @@ module Url2png
           when 'v6'
             ######
             # v6 #
+            # http://beta.url2png.com/v6/<APIKEY>/<TOKEN>/png/?url=google.com
             ######
             
-            # http://beta.url2png.com/v6/<APIKEY>/<TOKEN>/png/?url=google.com
-                        
-            query = {
-              :url       => url,
-              :force     => options[:force],     # [false,always,timestamp] Default: false
-              :fullpage  => options[:fullpage],  # [true,false] Default: false
-              :thumbnail_max_width => options[:thumbnail_max_width], # scaled img width px; Default no-scaling
-              :thumbnail_max_height => options[:thumbnail_max_height],
-              :viewport  => options[:viewport],  # Max 5000x5000; Default 1280x1024
-            }
+            # check for unavailable options
+            options_available = [:url, :force, :fullpage, :thumbnail_max_width, :thumbnail_max_height, :viewport]
+            options = check_options(options, options_available)
           
-            query_string = query.
+            query_string = options.
                 sort_by {|s| s[0].to_s }. # sort query by keys for uniformity
                 select {|s| s[1] }.       # skip empty options
                 map {|s| s.map {|v| CGI::escape(v.to_s) }.join('=') }. # escape keys & vals
@@ -90,16 +100,21 @@ module Url2png
           
           
             "http://beta.url2png.com/v6/#{Url2png.api_key}/#{token}/png/?#{query_string}"
-            
+          
+          
+          
           when 'v4'
             ######
             # v4 #
+            # http://beta.url2png.com/v4/<APIKEY>/<TOKEN>/<VIEWPORT>-<THUMBNAIL>-<FULL>/<TARGET>
             ######
             
-            # http://beta.url2png.com/v4/<APIKEY>/<TOKEN>/<VIEWPORT>-<THUMBNAIL>-<FULL>/<TARGET>
+            # check for unavailable options
+            options_available = [:url, :size, :thumbnail, :browser_size, :delay, :fullscreen]
+            options = check_options(options, options_available)
             
             # escape the url
-            safe_url= CGI::escape(url)
+            safe_url= CGI::escape(options[:url])
             
             # generate token
             token = Digest::MD5.hexdigest("#{ Url2png.private_key }+#{ safe_url }")
