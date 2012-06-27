@@ -5,49 +5,64 @@ module Url2png
   MODES = %w{production placehold dummy}
   
   def config c = {}
-    # SET
-    #   api_key
-    #   private_key
-    #   mode        (production[default] placehold dummy)
-    #   version     (v6[default])
+    # mandatory
+    self.api_key = c[:api_key]
+    self.private_key = c[:private_key]
     
-    c.each do |key, value|
-      case key
-        
-      when :api_key   
-        @api_key = value
-      when :private_key
-        @private_key = value
-      when :mode
-        raise "Url2png error: Invalid mode, only #{ MODES.join(', ') } are allowed" unless MODES.include?(value.to_s)
-        @mode = value
-      when :api_version
-        @api_version = value
-      end
-    end
+    # optional
+    self.mode = c[:mode] if c[:mode]
+    self.api_version = c[:api_version] if c[:api_version]
   end
   
-
-  # GETTERS
+  def api_key=api_key
+    @api_key=api_key
+  end
+  
   def api_key
     raise 'Url2png error: No public key defined!' if @api_key.nil?
     @api_key
+  end
+  
+  def private_key=private_key
+    @private_key = private_key
   end
 
   def private_key
     raise 'Url2png error: No private key defined!' if @private_key.nil?
     @private_key
   end
+  
+  def mode=mode
+    raise "Url2png error: Invalid mode, only #{ MODES.join(', ') } are allowed" unless MODES.include?(mode.to_s)
+    @mode = mode
+  end
 
   def mode
     @mode ||= 'production' # default: production
   end
   
+  def api_version=api_version
+    @api_version = api_version || 'v4'
+  end
+  
   def api_version
-    @api_version ||= 'v4' #default: v4
+    @api_version || 'v4' #default: v4
+  end
+  
+  def default_size=default_size
+    @default_size = default_size || "400x400"
   end
   
   def default_size
-    @default_size ||= "400x400"
+    @default_size || "400x400"
+  end
+  
+  def token param
+    case self.api_version
+    when 'v6'
+      Digest::MD5.hexdigest("#{param}#{self.private_key}")
+    when 'v4', 'v3'
+      Digest::MD5.hexdigest("#{self.private_key}+#{param}")
+    end
   end
 end
