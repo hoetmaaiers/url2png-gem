@@ -6,6 +6,7 @@ module Url2png
       # ------------------
       # complete image tag
       
+      
       def url2png_image_tag url, options = {}
         # parse size
         dim = Url2png::Dimensions.parse(options)
@@ -28,13 +29,15 @@ module Url2png
       
       
       def check_options options, options_available
+  
         # filter out unavailable options
         options = options.select do |key, value|
           if options_available.include? key 
             true
           else
             # size is a special option, only usable in the gem
-            raise "\"#{key}\" is not a valid option" unless key == :size
+            homepage = "https://github.com/robinhoudmeyers/url2png-gem"
+            raise "\"#{key}\" is not a valid option \nCheck the gem homepage for information about options: #{homepage}" unless key == :size
           end
         end
       end
@@ -160,7 +163,11 @@ module Url2png
             size = options[:size] || Url2png.default_size
             
             # build options portion of URL
-            bounds = "FULL" if options[:fullscreen] || size
+            if options[:fullscreen]
+              bounds = "FULL"
+            else
+              bounds = size
+            end
             
             # build image url
             File.join(
