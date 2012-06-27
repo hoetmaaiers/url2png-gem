@@ -65,8 +65,7 @@ Generate an image tag:
 
 To only get the image url:
 
-    site_image_url 'http://www.zwartopwit.com', 
-    			   :size => '300x200'
+    site_image_url url, [options]
 
 Options differ by version!
 
