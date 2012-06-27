@@ -6,16 +6,16 @@ module Url2png
       # ------------------
       # complete image tag
       
-      def url2png_image_tag options = {}
+      def url2png_image_tag url, options = {}
         # parse size
         dim = Url2png::Dimensions.parse(options)
         
         # ensure image alt 
-        alt = options.key?(:alt) ? options.delete(:alt) : options[:url]
+        alt = options.key?(:alt) ? options.delete(:alt) : url
         
         # build image tag
         img =  '<img'
-        img << " src='#{ site_image_url(options) }'"
+        img << " src='#{ site_image_url(url, options) }'"
         img << " alt='#{ alt }'"
         img << " width='#{ dim[:width] }'" if options[:size]
         img << " height='#{ dim[:height] }'" if options[:size]
@@ -41,7 +41,7 @@ module Url2png
       
       # --------------------------
       # only the url for the image
-      def site_image_url options = {}
+      def site_image_url url, options = {}
         # parse size
         dim = Url2png::Dimensions.parse(options)
         
@@ -86,15 +86,18 @@ module Url2png
             ######
             
             # check for unavailable options
-            options_available = [:url, :force, :fullpage, :thumbnail_max_width, :thumbnail_max_height, :viewport]
+            options_available = [:force, :fullpage, :thumbnail_max_width, :thumbnail_max_height, :viewport]
             options = check_options(options, options_available)
-          
+            
+            # add url to options query
+            options[:url] = url
+            
             query_string = options.
                 sort_by {|s| s[0].to_s }. # sort query by keys for uniformity
                 select {|s| s[1] }.       # skip empty options
                 map {|s| s.map {|v| CGI::escape(v.to_s) }.join('=') }. # escape keys & vals
                 join('&')
-          
+
             # generate token
             token = Url2png.token query_string
           
@@ -110,11 +113,11 @@ module Url2png
             ######
             
             # check for unavailable options
-            options_available = [:url, :size, :thumbnail, :browser_size, :delay, :fullscreen]
+            options_available = [:size, :thumbnail, :browser_size, :delay, :fullscreen]
             options = check_options(options, options_available)
             
             # escape the url
-            safe_url= CGI::escape(options[:url])
+            safe_url= CGI::escape(url)
             
             # generate token
             token = Url2png.token safe_url
@@ -144,14 +147,20 @@ module Url2png
 
             # http://api.url2png.com/v3/api_key/security_hash/bounds/url
 
+            options_available = [:fullscreen, :size]
+            options = check_options(options, options_available)
+            
             # escape the url
             safe_url= CGI::escape(url)
 
             # generate token
             token = Url2png.token safe_url
 
+            # custom size or default_size
+            size = options[:size] || Url2png.default_size
+            
             # build options portion of URL
-            bounds = "FULL" if options[:fullscreen] || Url2png.default_size
+            bounds = "FULL" if options[:fullscreen] || size
             
             # build image url
             File.join(
@@ -168,8 +177,8 @@ module Url2png
 
       # -----
       # Alias
-      def site_image_tag options = {}
-        url2png_image_tag(options)
+      def site_image_tag url, options = {}
+        url2png_image_tag(url, options)
       end      
     end
   end
