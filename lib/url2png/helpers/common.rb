@@ -34,7 +34,7 @@ module Url2png
             true
           else
             # size is a special option, only usable in the gem
-            warn  "\"#{key}\" is not a valid option" unless key == :size
+            raise "\"#{key}\" is not a valid option" unless key == :size
           end
         end
       end
