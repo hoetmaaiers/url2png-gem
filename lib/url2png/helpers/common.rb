@@ -134,7 +134,11 @@ module Url2png
             
             # build options portion of URL
             url_options = []
-            if dim[:size] then url_options << "t#{ dim[:size] }" else url_options << "t#{ dim[:thumbnail] }" end
+            
+            # set thumbnail
+            options[:thumbnail] ||= options[:size]
+              
+            url_options << "t#{ options[:thumbnail] }"
             url_options << "s#{ options[:browser_size] }" if options[:browser_size]
             url_options << "d#{ options[:delay] }" if options[:delay]
             url_options << "FULL" if options[:fullscreen]
