@@ -28,8 +28,9 @@ You can define the api version if you want to use an different version of the ur
  g
 Available versions:
 
-* v4 (default)
-* v6 (in beta, only for enabled users)
+* v3
+* v4
+* v6 (default)
 
 
 ##### mode
@@ -65,6 +66,9 @@ Generate an image tag:
 
 To only get the image url:
 
+    url2png_image_url url, [options]
+    
+    # alias (older version)
     site_image_url url, [options]
 
 Options differ by version!
@@ -80,7 +84,11 @@ default: no resizing
 	url2png_image_tag 'http://www.zwartopwit.com', 
 					  :thumbnail_max_width => 500, 
 					  :thumbnail_max_height => 500
-	
+					  
+					  # alias for :thumbnail_...
+					  :max_width => 500
+					  :max_height => 500
+
 
 ##### Viewport
 Set viewport dimensions, adjust to your hearts content.<br>
@@ -118,17 +126,21 @@ Forces a fresh screenshot with each request, overwriting the previous copy.<br>
 	
 	url2png_image_tag 'http://www.zwartopwit.com', 
 						:force => true
+						
+						
+##### Size
+Sets width and height attributes from the html \<img> tag.
+	
+	url2png_image_tag 'http://www.zwartopwit.com',
+					  :size => "800x600"
 
 	
 ### Version 4
 
+##### Thumbnail
 
-##### Size
 By default the size is set to 400 x 400 px.
-
-This is a proportion bounding box. Thumbnails will be resized to fit within this box.
-
-default: 'ORIGINAL'<br>
+Proportions are constrained.
 
 examples:
 
@@ -137,8 +149,10 @@ examples:
 
     url2png_image_tag 'http://www.zwartopwit.com', 
     				  :size => 'ORIGINAL'
+##### Size
 
-##### Thumbnail (alias for :size)
+This is a proportion bounding box. Almost the same as :thumbnail, but thumbnails will be resized to fit within this box. Width and height attribute of the html \<img> tag will be set.
+
 
 ##### Browser size
 Set the initial browser screen size.<br>
@@ -150,7 +164,6 @@ Set the initial browser screen size.<br>
 example:
     
     url2png_image_tag 'http://www.zwartopwit.com', 
-    				  :size => '300x200', 
     				  :browser_size => '1024x2500'
 
 ##### Delay
