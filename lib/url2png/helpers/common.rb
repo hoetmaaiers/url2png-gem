@@ -211,7 +211,7 @@ module Url2png
         url2png_image_tag(url, options)
       end
       
-      def url2png_image_url url, options = {}
+      def site_image_url url, options = {}
         url2png_image_url(url, options)
       end
     end
