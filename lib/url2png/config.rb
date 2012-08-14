@@ -42,7 +42,7 @@ module Url2png
   end
   
   def api_version=api_version
-    @api_version = api_version || 'v4'
+    @api_version = api_version || 'v6' # set default to latest open version
   end
   
   def api_version
