@@ -16,7 +16,7 @@ module Url2png
         
         # build image tag
         img =  '<img'
-        img << " src='#{ site_image_url(url, options) }'"
+        img << " src='#{ url2png_image_url(url, options) }'"
         img << " alt='#{ alt }'"
         img << " width='#{ dim[:width] }'" if options[:size]
         img << " height='#{ dim[:height] }'" if options[:size]
@@ -30,7 +30,7 @@ module Url2png
       
       # --------------------------
       # only the url for the image
-      def site_image_url url, options = {}
+      def url2png_image_url url, options = {}
         # parse size
         dim = Url2png::Dimensions.parse(options)
         
@@ -209,7 +209,11 @@ module Url2png
       # Alias
       def site_image_tag url, options = {}
         url2png_image_tag(url, options)
-      end      
+      end
+      
+      def url2png_image_url url, options = {}
+        url2png_image_url(url, options)
+      end
     end
   end
 end
