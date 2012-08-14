@@ -2,9 +2,9 @@ module Url2png
   module Dimensions
     
     def self.parse options
-      if Url2png.api_version == "v6"
-        options[:size] ||= "#{options[:thumbnail_max_width]}x#{options[:thumbnail_max_height]}"
-      end
+      # if Url2png.api_version == "v6"
+      #   options[:size] ||= "#{options[:thumbnail_max_width]}x#{options[:thumbnail_max_height]}"
+      # end
       
       # distill image size
       size   = (options[:size]  || Url2png.default_size).split('x')
