@@ -70,7 +70,7 @@ module Url2png
           when 'v6'
             ######
             # v6 #
-            # http://beta.url2png.com/v6/<APIKEY>/<TOKEN>/png/?url=google.com
+            # http://api.url2png.com/v6/<APIKEY>/<TOKEN>/png/?url=google.com
             ######
             
             # check for unavailable options
@@ -114,7 +114,7 @@ module Url2png
             token = Url2png.token query_string
           
           
-            "http://beta.url2png.com/v6/#{Url2png.api_key}/#{token}/png/?#{query_string}"          
+            "http://api.url2png.com/v6/#{Url2png.api_key}/#{token}/png/?#{query_string}"          
           
           when 'v4'
             ######
