@@ -46,7 +46,7 @@ module Url2png
   end
   
   def api_version
-    @api_version || 'v4' #default: v4
+    @api_version || 'v6' #default: v6
   end
   
   def default_size=default_size
