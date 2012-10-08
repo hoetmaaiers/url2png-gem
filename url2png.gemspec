@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "url2png"
-  s.version = "0.3.3"
+  s.version = "0.3.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["robinhoudmeyers", "wout fierens", "fuzzyalej", "ceritium", "lukemelia"]
-  s.date = "2012-09-19"
+  s.date = "2012-10-08"
   s.description = "Generate screenshots from websites almost instantly at any preferred size using ruby and the url2png.com API"
   s.email = "houdmeyers@gmail.com"
   s.extra_rdoc_files = [
