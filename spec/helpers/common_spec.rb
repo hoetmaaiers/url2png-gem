@@ -40,5 +40,17 @@ describe Url2png do
     it "should concatenate options by using ampersands" do
       site_image_url('http://www.nytimes.com/', :delay => 3, :fullpage => true).should =~ %r{delay=3&fullpage=true}
     end
+
+    it "should request the png format by default" do
+      site_image_url('http://www.nytimes.com/').should =~ %r{png}
+    end
+
+    it "should request the json format" do
+      site_image_url('http://www.nytimes.com/', :format => :json).should =~ %r{json}
+    end
+
+    it "should request the png format" do
+      site_image_url('http://www.nytimes.com/', :format => :png).should =~ %r{png}
+    end
   end
 end

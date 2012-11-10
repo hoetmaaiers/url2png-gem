@@ -75,8 +75,8 @@ module Url2png
 
             # check for unavailable options
             options_alias = [:max_width, :max_height]
-            options_available = [:delay, :force, :fullpage, :thumbnail_max_width, :thumbnail_max_height, :viewport]
-            
+            options_available = [:delay, :force, :fullpage, :thumbnail_max_width, :thumbnail_max_height, :viewport, :format]
+
             # assign alias to valid option
             options_alias.each do |key|
               if options.key?(key)
@@ -108,10 +108,12 @@ module Url2png
 
             # generate token
             token = Url2png.token query_string
-          
-          
-            "http://api.url2png.com/v6/#{Url2png.api_key}/#{token}/png/?#{query_string}"          
-          
+
+            # set the format of the asset requested
+            format = options[:format] || "png"
+
+            "http://api.url2png.com/v6/#{Url2png.api_key}/#{token}/#{format}/?#{query_string}"
+
           when 'v4'
             ######
             # v4 #
