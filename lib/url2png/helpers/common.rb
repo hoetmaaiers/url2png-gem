@@ -2,18 +2,18 @@ module Url2png
   module Helpers
     module Common
       extend self
-      
+
       # ------------------
       # complete image tag
-      
-      
+
+
       def url2png_image_tag url, options = {}
         # parse size
         dim = Url2png::Dimensions.parse(options)
-        
+
         # ensure image alt 
         alt = options.key?(:alt) ? options.delete(:alt) : url
-        
+
         # build image tag
         img =  '<img'
         img << " src='#{ url2png_image_url(url, options) }'"
@@ -24,16 +24,16 @@ module Url2png
           img << " #{ k }=#{ v }" unless v.nil? || v == ''
         end
         img << ' />'
-        img.html_safe
+        img.respond_to?(:html_safe) ? img.html_safe : img # Utilize ActiveSupport if loaded
       end
-      
-      
+
+
       # --------------------------
       # only the url for the image
       def url2png_image_url url, options = {}
         # parse size
         dim = Url2png::Dimensions.parse(options)
-        
+
         case Url2png.mode
         when 'dummy'
           'data:image/png;base64,
@@ -60,11 +60,11 @@ module Url2png
           ICAgICAgICAgICAgPHJkZjpCYWcvPgogICAgICAgICA8L2RjOnN1YmplY3Q+CiAgICAgIDwvcmRm
           OkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgrlPw1BAAAAFElEQVQIHWM8
           fPjwfwYgYAIRIAAAMrgDTJyW2igAAAAASUVORK5CYII='.gsub(/\n/,'')
-          
+
         when 'placehold'
           "http://placehold.it/#{ dim[:size] }"
-          
-        else               
+
+        else
           # build parameters portion of URL
           case Url2png.api_version
           when 'v6'
@@ -72,11 +72,11 @@ module Url2png
             # v6 #
             # http://api.url2png.com/v6/<APIKEY>/<TOKEN>/png/?url=google.com
             ######
-            
+
             # check for unavailable options
             options_alias = [:max_width, :max_height]
-            options_available = [:delay, :force, :fullpage, :thumbnail_max_width, :thumbnail_max_height, :viewport]
-            
+            options_available = [:delay, :force, :fullpage, :thumbnail_max_width, :thumbnail_max_height, :viewport, :format]
+
             # assign alias to valid option
             options_alias.each do |key|
               if options.key?(key)
@@ -93,17 +93,13 @@ module Url2png
                 end
               end
             end
-            
-            # options_alias.each do |key|
-            #   if options.include?(key) then options.delete(key) end
-            # end
-          
-            
+
             options = check_options(options, options_available)
-            
+
             # add url to options query
             options[:url] = url
-            
+
+
             query_string = options.
                 sort_by {|s| s[0].to_s }. # sort query by keys for uniformity
                 select {|s| s[1] }.       # skip empty options
@@ -112,38 +108,40 @@ module Url2png
 
             # generate token
             token = Url2png.token query_string
-          
-          
-            "http://api.url2png.com/v6/#{Url2png.api_key}/#{token}/png/?#{query_string}"          
-          
+
+            # set the format of the asset requested
+            format = options[:format] || "png"
+
+            "http://api.url2png.com/v6/#{Url2png.api_key}/#{token}/#{format}/?#{query_string}"
+
           when 'v4'
             ######
             # v4 #
             # http://beta.url2png.com/v4/<APIKEY>/<TOKEN>/<VIEWPORT>-<THUMBNAIL>-<FULL>/<TARGET>
             ######
-            
+
             # check for unavailable options
             options_available = [:size, :thumbnail, :browser_size, :delay, :fullscreen]
             options = check_options(options, options_available)
-            
+
             # escape the url
             safe_url= CGI::escape(url)
-            
+
             # generate token
             token = Url2png.token safe_url
-            
+
             # build options portion of URL
             url_options = []
-            
+
             # set thumbnail
             options[:thumbnail] ||= options[:size]
-              
+
             url_options << "t#{ options[:thumbnail] }"
             url_options << "s#{ options[:browser_size] }" if options[:browser_size]
             url_options << "d#{ options[:delay] }" if options[:delay]
             url_options << "FULL" if options[:fullscreen]
             url_options_string = url_options.join('-')
-            
+
             # build image url
             File.join(
               "http://beta.url2png.com",
@@ -153,33 +151,33 @@ module Url2png
               url_options_string,
               safe_url
             )
-            
+
           when 'v3'
             ######
             # v3 #
             ######
-          
+
             # http://api.url2png.com/v3/api_key/security_hash/bounds/url
-          
+
             options_available = [:fullscreen, :size]
             options = check_options(options, options_available)
-            
+
             # escape the url
             safe_url= CGI::escape(url)
-          
+
             # generate token
             token = Url2png.token safe_url
-          
+
             # custom size or default_size
             size = options[:size] || Url2png.default_size
-            
+
             # build options portion of URL
             if options[:fullscreen]
               bounds = "FULL"
             else
               bounds = size
             end
-            
+
             # build image url
             File.join(
               "http://api.url2png.com",
@@ -190,12 +188,12 @@ module Url2png
               safe_url
             )
           end
-          
+
         end
       end
-      
+
       def check_options options, options_available
-  
+
         # filter out unavailable options
         options = options.select do |key, value|
           if options_available.include? key 
@@ -204,17 +202,17 @@ module Url2png
             # size is a special option, only usable in the gem
             homepage = "https://github.com/robinhoudmeyers/url2png-gem"
             raise "#{options} \n \"#{key}\" is not a valid option \nCheck the gem homepage for information about options: #{homepage}" unless key == :size
-            
+
           end
         end
       end
-      
+
       # -----
       # Alias
       def site_image_tag url, options = {}
         url2png_image_tag(url, options)
       end
-      
+
       def site_image_url url, options = {}
         url2png_image_url(url, options)
       end
