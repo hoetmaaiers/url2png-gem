@@ -24,7 +24,7 @@ module Url2png
           img << " #{ k }=#{ v }" unless v.nil? || v == ''
         end
         img << ' />'
-        img.html_safe
+        img.respond_to?(:html_safe) ? img.html_safe : img # Utilize ActiveSupport if loaded
       end
 
 
