@@ -111,8 +111,7 @@ module Url2png
 
             # set the format of the asset requested
             format = options[:format] || "png"
-
-            "http://api.url2png.com/v6/#{Url2png.api_key}/#{token}/#{format}/?#{query_string}"
+            "#{ Url2png.api_url }/v6/#{Url2png.api_key}/#{token}/#{format}/?#{query_string}"
 
           when 'v4'
             ######
@@ -144,7 +143,7 @@ module Url2png
 
             # build image url
             File.join(
-              "http://beta.url2png.com",
+              "#{Url2png.api_url}",
               Url2png.api_version,
               Url2png.api_key,
               token,
@@ -180,7 +179,7 @@ module Url2png
 
             # build image url
             File.join(
-              "http://api.url2png.com",
+              "#{Url2png.api_url}",
               Url2png.api_version,
               Url2png.api_key,
               token,

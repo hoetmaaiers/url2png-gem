@@ -3,6 +3,7 @@ module Url2png
 
   # modes
   MODES = %w{production placehold dummy}
+  API_URL = 'http://beta.url2png.com'
 
   def config c = {}
     # mandatory
@@ -12,6 +13,7 @@ module Url2png
     # optional
     self.mode = c[:mode] if c[:mode]
     self.api_version = c[:api_version] if c[:api_version]
+    self.api_url = c[:api_url] if c[:api_url]
   end
 
   def api_key=api_key
@@ -47,6 +49,16 @@ module Url2png
 
   def api_version
     @api_version || 'v6' #default: v6
+  end
+
+  def api_url=api_url
+    @api_url = api_url || API_URL
+  end
+
+  def api_url
+    # reference => http://url2png.com/docs/
+    # currently all versions suggest 'beta'
+    @api_url || API_URL
   end
 
   def default_size=default_size
