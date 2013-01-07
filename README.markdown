@@ -17,20 +17,35 @@ Any Ruby on Rails developer who wants/needs to generate screenshots from sites u
 You must define your public key and shared secret, they are required:
 
 	Url2png.config({
-	    :api_key => 'PXXXXXXXXXXXXX',
-	    :private_key => 'SXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+		
+		# required
+	    :api_key 	  => 'PXXXXXXXXXXXXX',
+	    :private_key  => 'SXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+	    
+	    #optional
+	    :api_version  => 'v4',
+	    :api_url 	  => 'http://beta.url2png.com',
+	    :mode         => 'production',
+	    :default_size => '500x500'	    
+	    
 	})
 
-##### version
+##### api_version
 You can define the api version if you want to use an different version of the url2png api. 
 	
 	Url2png.api_version = 'v4'
- g
 Available versions:
 
-* v3
-* v4
 * v6 (default)
+* v4
+* v3
+
+
+##### api_url
+
+Define an option api_url. By default 'http://beta.url2png.com'.
+
+	Url2png.api_url = 'http://beta.url2png.com'
 
 
 ##### mode
