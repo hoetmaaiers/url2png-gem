@@ -120,7 +120,7 @@ module Url2png
             ######
 
             # check for unavailable options
-            options_available = [:size, :thumbnail, :browser_size, :delay, :fullscreen, :unique, :user_agent]
+            options_available = [:size, :thumbnail, :browser_size, :delay, :fullscreen]
             options = check_options(options, options_available)
 
             # escape the url
