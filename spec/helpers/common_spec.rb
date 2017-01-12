@@ -17,6 +17,26 @@ describe Url2png do
   end
 
   describe "site_image_url" do
+    it "should allow unique" do
+      site_image_url('http://www.nytimes.com/', unique: 'unique').should =~ %r{unique=unique}
+    end
+
+    it "should allow custom_css_url" do
+      site_image_url('http://www.nytimes.com/', custom_css_url: 'http://random.com/random.css').should =~ %r{custom_css_url}
+    end
+
+    it "should allow user_agent" do
+      site_image_url('http://www.nytimes.com/', user_agent: 'ua').should =~ %r{user_agent=ua}
+    end
+
+    it "should allow say_cheese" do
+      site_image_url('http://www.nytimes.com/', say_cheese: 'true').should =~ %r{say_cheese=true}
+    end
+
+    it "should allow ttl" do
+      site_image_url('http://www.nytimes.com/', ttl: 'ttl').should =~ %r{ttl=ttl}
+    end
+
     it "should encode the thumbnail max width when provided" do
       site_image_url('http://www.nytimes.com/', :thumbnail_max_width => '200').should =~ %r{thumbnail_max_width=200}
     end
