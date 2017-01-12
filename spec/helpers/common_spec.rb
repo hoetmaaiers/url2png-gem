@@ -21,6 +21,10 @@ describe Url2png do
       site_image_url('http://www.nytimes.com/', unique: 'unique').should =~ %r{unique=unique}
     end
 
+    it "should allow unique" do
+      site_image_url('http://www.nytimes.com/', accept_languages: 'de').should =~ %r{accept_languages=de}
+    end
+
     it "should allow custom_css_url" do
       site_image_url('http://www.nytimes.com/', custom_css_url: 'http://random.com/random.css').should =~ %r{custom_css_url}
     end
