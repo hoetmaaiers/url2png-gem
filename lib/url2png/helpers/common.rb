@@ -75,7 +75,7 @@ module Url2png
 
             # check for unavailable options
             options_alias = [:max_width, :max_height]
-            options_available = [:delay, :force, :fullpage, :thumbnail_max_width, :thumbnail_max_height, :viewport, :format]
+            options_available = [:accept_languages, :custom_css_url, :delay, :force, :format, :fullpage, :say_cheese, :thumbnail_max_height, :thumbnail_max_width, :ttl, :unique, :user_agent, :viewport] 
 
             # assign alias to valid option
             options_alias.each do |key|
