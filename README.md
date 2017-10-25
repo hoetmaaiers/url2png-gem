@@ -17,22 +17,22 @@ Any Ruby on Rails developer who wants/needs to generate screenshots from sites u
 You must define your public key and shared secret, they are required:
 
 	Url2png.config({
-		
+
 		# required
 	    :api_key 	  => 'PXXXXXXXXXXXXX',
 	    :private_key  => 'SXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-	    
-	    #optional
+
+    # optional
 	    :api_version  => 'v4',
 	    :api_url 	  => 'http://beta.url2png.com',
 	    :mode         => 'production',
-	    :default_size => '500x500'	    
-	    
+	    :default_size => '500x500'
+
 	})
 
 ##### api_version
-You can define the api version if you want to use an different version of the url2png api. 
-	
+You can define the api version if you want to use an different version of the url2png api.
+
 	Url2png.api_version = 'v4'
 Available versions:
 
@@ -75,14 +75,14 @@ In Rails you probably want to do configuration in an initializer.
 Generate an image tag:
 
     url2png_image_tag url, [options]
-    
+
     # alias (older version)
     site_image_tag url, [options]
 
 To only get the image url:
 
     url2png_image_url url, [options]
-    
+
     # alias (older version)
     site_image_url url, [options]
 
@@ -95,11 +95,11 @@ Options differ by version!
 ##### Thumbnail
 Constrain screenshot based on width or height or both.<br>
 default: no resizing
-		
-	url2png_image_tag 'http://www.zwartopwit.com', 
-					  :thumbnail_max_width => 500, 
+
+	url2png_image_tag 'http://www.zwartopwit.com',
+					  :thumbnail_max_width => 500,
 					  :thumbnail_max_height => 500
-					  
+
 					  # alias for :thumbnail_...
 					  :max_width => 500
 					  :max_height => 500
@@ -108,7 +108,7 @@ default: no resizing
 ##### Viewport
 Set viewport dimensions, adjust to your hearts content.<br>
 default: 1480x1037
-	
+
 	url2png_image_tag 'http://www.zwartopwit.com',
 					  :viewport => '1024x900'
 
@@ -116,10 +116,10 @@ default: 1480x1037
 ##### Fullpage
 Will attempt to capture entire document canvas.<br>
 default: false
-	
-	url2png_image_tag 'http://www.zwartopwit.com', 
+
+	url2png_image_tag 'http://www.zwartopwit.com',
 					  :fullpage => true
-	
+
 
 ##### Delay
 Extra delay (in seconds) forced between page load and screenshot.<br>
@@ -129,27 +129,27 @@ default: 1<br>
 * max: 5<br>
 
 example:
-		
+
 	url2png_image_tag 'http://www.zwartopwit.com',
-					  :size => '300x200', 
+					  :size => '300x200',
 					  :delay => 2
-	
-	
+
+
 ##### Force
 Forces a fresh screenshot with each request, overwriting the previous copy.<br>
 **You will be charged for every request made using the force option.**
-	
-	url2png_image_tag 'http://www.zwartopwit.com', 
+
+	url2png_image_tag 'http://www.zwartopwit.com',
 						:force => true
-						
-						
+
+
 ##### Size
 Sets width and height attributes from the html \<img> tag.
-	
+
 	url2png_image_tag 'http://www.zwartopwit.com',
 					  :size => "800x600"
 
-	
+
 ### Version 4
 
 ##### Thumbnail
@@ -159,10 +159,10 @@ Proportions are constrained.
 
 examples:
 
-    url2png_image_tag 'http://www.zwartopwit.com', 
+    url2png_image_tag 'http://www.zwartopwit.com',
     				  :size => '500x500'
 
-    url2png_image_tag 'http://www.zwartopwit.com', 
+    url2png_image_tag 'http://www.zwartopwit.com',
     				  :size => 'ORIGINAL'
 ##### Size
 
@@ -177,8 +177,8 @@ Set the initial browser screen size.<br>
 * max: '4000x4000'<br>
 
 example:
-    
-    url2png_image_tag 'http://www.zwartopwit.com', 
+
+    url2png_image_tag 'http://www.zwartopwit.com',
     				  :browser_size => '1024x2500'
 
 ##### Delay
@@ -190,8 +190,8 @@ Extra delay (in seconds) forced between page load and screenshot.<br>
 
 example:
 
-	url2png_image_tag 'http://www.zwartopwit.com', 
-					  :size => '300x200', 
+	url2png_image_tag 'http://www.zwartopwit.com',
+					  :size => '300x200',
 					  :delay => 2
 
 ##### Fullscreen
@@ -201,8 +201,8 @@ default: false<br>
 
 example:
 
-    url2png_image_tag 'http://www.zwartopwit.com', 
-    				  :size => '300x200', 
+    url2png_image_tag 'http://www.zwartopwit.com',
+    				  :size => '300x200',
     				  :fullscreen => true
 
 
@@ -213,9 +213,9 @@ example:
 By default the size is set to 400 x 400 px.
 To generate an image with a specific size:
 
-    url2png_image_tag 'http://www.zwartopwit.com', 
+    url2png_image_tag 'http://www.zwartopwit.com',
     				  :size => '300x200'
-    			   
+
 
 ##### Fullscreen
 When true, Will attempt to capture entire document canvas.<br>
@@ -224,10 +224,10 @@ default: false<br>
 
 example:
 
-    url2png_image_tag 'http://www.zwartopwit.com', 
+    url2png_image_tag 'http://www.zwartopwit.com',
     				  :fullscreen => true
-    			   
-    			   
+
+
 ## Important
 
 This gem is written for Rails 3.
@@ -237,7 +237,7 @@ Note that this gem is still under development.
 
 
 ## Contributing to url2png
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project
@@ -246,7 +246,7 @@ Note that this gem is still under development.
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-Original API docs: 
+Original API docs:
 
 * v4: https://url2png.com/doc/
 * v6: http://staging.url2png.com/docs/v6.php
