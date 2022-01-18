@@ -62,7 +62,7 @@ module Url2png
           fPjwfwYgYAIRIAAAMrgDTJyW2igAAAAASUVORK5CYII='.gsub(/\n/,'')
 
         when 'placehold'
-          "http://via.placeholder.com/#{ dim[:size] }"
+          "https://via.placeholder.com/#{ dim[:size] }"
 
         else
           # build parameters portion of URL
